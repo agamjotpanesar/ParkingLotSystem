@@ -10,8 +10,8 @@ public class ParkingSlipManager {
     ParkingSlipManager() {
         parkingSlipHashMap = new HashMap<>();
         fareCalculatorHashMap = new HashMap<>();
-        fareCalculatorHashMap.put("Car", new FareCalculator());
-        fareCalculatorHashMap.put("Bike", new FareCalculator());
+        fareCalculatorHashMap.put("Car", new CarFareCalculator());
+        fareCalculatorHashMap.put("Bike", new BikeFareCalculator());
     }
 
     public void createParkingSLip(String vehicleId) {

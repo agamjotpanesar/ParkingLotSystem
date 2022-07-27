@@ -1,25 +1,26 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SlotManager {
 
-    public int assignSlot(List<Slot> slotList) {
-        for(int i=0;i<slotList.size();i++) {
-            if(!slotList.get(i).isSlotOccupied) {
-                Slot toBeAssignedSlot = slotList.get(i);
-                toBeAssignedSlot.isSlotOccupied = true;
-                return toBeAssignedSlot.slotId;
-            }
-        }
-        return -1;
+    SlotAssigner slotAssigner;
+    SlotManager(SlotAssigner slotAssigner) {
+        this.slotAssigner = slotAssigner;
     }
 
-    public void unparkVehicle(int slotId, List<Slot> slotList) {
+    public int assignSlot(HashMap<Integer, List<Slot>> slotMaps, String vehicleType) {
+        return slotAssigner.assignSlot(slotMaps, vehicleType);
+    }
+
+    public void unparkVehicle(int slotId, HashMap<Integer, List<Slot>> slotMaps, int slotsPerFloor) {
+        int floorId = slotId / slotsPerFloor + 1;
+        List<Slot> slotList = slotMaps.get(floorId);
         for(int i=0;i<slotList.size();i++) {
             if(slotList.get(i).slotId == slotId) {
-                Slot toBeFreed = slotList.get(i);
-                toBeFreed.isSlotOccupied = false;
+                slotList.get(i).isSlotOccupied = false;
             }
         }
     }

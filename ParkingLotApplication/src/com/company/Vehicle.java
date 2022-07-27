@@ -8,7 +8,6 @@ public class Vehicle {
 
     Vehicle() {
         vehicleId = "AGAM_AKSHAY_CAR";
-        vehicleType = "Car";
     }
 
 }
